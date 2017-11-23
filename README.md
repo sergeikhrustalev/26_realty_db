@@ -1,6 +1,6 @@
 # Real Estate Site
 
-Site for searching Real Estate advermisements
+Site for searching Real Estate advertisements
 
 # Set up database
 
