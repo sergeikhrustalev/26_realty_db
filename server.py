@@ -4,10 +4,17 @@ from models import Advertisement
 
 
 @app.route('/')
-def ads_list():
+@app.route('/page/<int:page>')
+def ads_list(page=1):
 
-    ads = Advertisement.query.all()
+    per_page = 5
+
+    ads = Advertisement.query.filter(Advertisement.active == True)
+
+    ads = ads.paginate(page, per_page, False)
+
     return render_template('ads_list.html', ads=ads)
 
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
