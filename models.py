@@ -1,7 +1,8 @@
 from app import db
 
+
 class Advertisement(db.Model):
-    
+
     __tablename__ = 'advertisements'
     id = db.Column(db.Integer, primary_key=True, autoincrement=False)
     settlement = db.Column(db.String(127))

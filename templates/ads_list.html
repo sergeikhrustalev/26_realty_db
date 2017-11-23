@@ -94,7 +94,7 @@
                   <div class="form-group ">
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" name="new_building" value="True">
+                        <input type="checkbox" name="new_building" value="True" {% if new_building %}checked{% endif %}>
                         только новостройки
                       </label>
                     </div>
@@ -103,14 +103,14 @@
                   <div class="form-group ">
                     <div class="input-group">
                       <span class="input-group-addon">от</span>
-                      <input autocomplete="off" type="text" value="" name="min_price" class="form-control js-price-format" placeholder="любая">
+                      <input autocomplete="off" type="text" value="{% if min_price %}{{ min_price }}{% endif %}" name="min_price" class="form-control js-price-format" placeholder="любая">
                       <span class="input-group-addon">р.</span>
                     </div>
                   </div>
                   <div class="form-group ">
                     <div class="input-group">
                       <span class="input-group-addon">до</span>
-                      <input autocomplete="off" type="text" value="" name="max_price" class="form-control js-price-format" placeholder="любая">
+                      <input autocomplete="off" type="text" value="{% if max_price %}{{ max_price }}{% endif %}" name="max_price" class="form-control js-price-format" placeholder="любая">
                       <span class="input-group-addon">р.</span>
                     </div>
                   </div>
@@ -154,14 +154,14 @@
                   <div class="clearfix">
                     <ul class="pagination pull-right">
                       {% if ads.has_prev %}
-                        <li><a href="{{ url_for(request.endpoint, page=ads.prev_num) }}"><span>«</span></a></li>
+                        <li><a href="{{ url_for(request.endpoint, page=ads.prev_num, min_price=min_price, max_price=max_price) }}"><span>«</span></a></li>
                       {% else %}
                         <li class="disabled"><span>«</span></li>
                       {% endif %}
                       {% for page in ads.iter_pages(right_current=2) %}
                         {% if page %}
                           {% if page != ads.page %}
-                            <li><a href="{{ url_for(request.endpoint, page=page) }}">{{ page }}</a></li>
+                            <li><a href="{{ url_for(request.endpoint, page=page, min_price=min_price, max_price=max_price) }}">{{ page }}</a></li>
                           {% else %}
                             <li class="active"><span>{{ page }}</span></li>
                           {% endif %}
@@ -170,7 +170,7 @@
                         {% endif %}
                       {% endfor %} 
                       {% if ads.has_next %}
-                        <li><a href="{{ url_for(request.endpoint, page=ads.next_num) }}" role="next">»</a></li>
+                        <li><a href="{{ url_for(request.endpoint, page=ads.next_num, min_price=min_price, max_price=max_price) }}" role="next">»</a></li>
                       {% else %}
                         <li class="disabled"><span>»</span></li>
                       {% endif %}
