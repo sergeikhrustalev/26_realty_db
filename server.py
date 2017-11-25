@@ -1,4 +1,5 @@
 from datetime import date
+from os import getenv
 
 from sqlalchemy.sql.expression import true
 from sqlalchemy import or_
@@ -58,4 +59,4 @@ def ads_list():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=getenv('SERVER_DEBUG'))
