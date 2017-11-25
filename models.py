@@ -12,11 +12,11 @@ class Advertisement(db.Model):
         index=True
     )
     
-    settlement = db.Column(db.String(127))
+    settlement = db.Column(db.String(127), index=True)
     under_construction = db.Column(db.Boolean)
     description = db.Column(db.Text)
-    price = db.Column(db.Integer)
-    oblast_district = db.Column(db.String(127), index=True)
+    price = db.Column(db.Integer, index=True)
+    oblast_district = db.Column(db.String(127))
     living_area = db.Column(db.Float)
     has_balcony = db.Column(db.Boolean)
     address = db.Column(db.String(255))
