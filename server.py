@@ -52,6 +52,7 @@ def ads_list():
     return render_template(
         'ads_list.html',
         ads=ads,
+        oblast_district=oblast_district,
         min_price=min_price,
         max_price=max_price,
         new_building=new_building
