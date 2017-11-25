@@ -16,8 +16,16 @@ python database_manager.py --loaddata new_ads.json
 
 # Running site
 
+Production mode:
+
 ```bash
 $python server.py
+```
+
+Debug mode:
+
+```bash
+$SERVER_DEBUG=True python server.py
 ```
 
 # Project Goals
