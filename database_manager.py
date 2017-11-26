@@ -12,12 +12,6 @@ def get_ads_from_json(filepath):
         return json.load(file_handler)
 
 
-def create_new_base():
-
-    db.drop_all()
-    db.create_all()
-
-
 def load_ads(ads):
 
     db.session.add_all([
@@ -27,8 +21,6 @@ def load_ads(ads):
 
     ])
 
-    db.session.commit()
-
 
 def deactivate_ads():
 
@@ -37,8 +29,6 @@ def deactivate_ads():
     ).update(
         dict(active=False)
     )
-
-    db.session.commit()
 
 
 if __name__ == '__main__':
@@ -50,13 +40,23 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+
     if args.newbase:
-        create_new_base()
+
+        db.drop_all()
+        db.create_all()
 
     if args.loaddata:
 
-        deactivate_ads()
+        try:
 
-        load_ads(
-            get_ads_from_json(args.loaddata)
-        )
+            deactivate_ads()
+
+            load_ads(
+                get_ads_from_json(args.loaddata)
+            )
+
+            db.session.commit()
+
+        except:
+            db.session.rollback()
